@@ -1,9 +1,7 @@
 package com.nowcoder.toutiao.dao;
 
 import com.nowcoder.toutiao.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 /**
  * Created by kongxy on 2018/4/6 0006.
@@ -19,4 +17,10 @@ public interface UserDAO {
 
     @Select({"select " ,SELECT_FIELDS ,"from ",TABLE_NAME,"where id = #{id}"})
     User selectById(int id);
+
+    @Update({"update ",TABLE_NAME," set password=#{password} where id = #{id}"})
+    void updatePassword(User user);
+
+    @Delete({"delete from ",TABLE_NAME," where id=#{id}"})
+    void deleteById(int id);
 }
