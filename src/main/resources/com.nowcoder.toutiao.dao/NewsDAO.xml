@@ -3,17 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.nowcoder.toutiao.dao">
+<mapper namespace="com.nowcoder.toutiao.dao.NewsDAO">
     <sql id="table">news</sql>
     <sql id="selectFields">id,title,link,image,like_count,comment_count,created_date,user_id</sql>
     <select id="selectByUserIdAndOffset" resultType="com.nowcoder.toutiao.model.News">
         select
         <include refid="selectFields"/>
-
-        <if test="userId!=0">
+        from
+        <include refid="table"/>
+        <if test="userId !=0">
             where user_id = #{userId}
         </if>
         order by id desc
-        limit #{offset},limit{limit}
+        limit #{offset},#{limit}
     </select>
 </mapper>

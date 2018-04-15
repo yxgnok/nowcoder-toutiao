@@ -44,18 +44,16 @@ public class InitDatabaseTests {
             Date date = new Date();
             date.setTime(date.getTime()+1000*3600*5*i);
             news.setCreatedDate(date);
-            news.setImage(String.format("http://images.nowcder.com/news/%dm.png",random.nextInt(1000)));
+            news.setImage(String.format("http://images.nowcoder.com/news/%dm.png",random.nextInt(1000)));
             news.setLikeCount(i + 1);
             news.setUserId(i + 1);
             news.setTitle(String.format("title[%d]",i));
             news.setLink(String.format("http://www.nowcoder.com/%d.html",i));
             newsDAO.addNews(news);
+            System.out.println(news.getId());
 
         }
 
-        Assert.assertEquals("newPassword",userDAO.selectById(1).getPassword());
-        userDAO.deleteById(1);
-        Assert.assertNull(userDAO.selectById(1));
     }
 
 }
