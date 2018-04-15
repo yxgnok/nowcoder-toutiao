@@ -4,7 +4,6 @@ import com.nowcoder.toutiao.model.News;
 import com.nowcoder.toutiao.model.ViewObject;
 import com.nowcoder.toutiao.service.NewsService;
 import com.nowcoder.toutiao.service.UserService;
-import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
-import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 

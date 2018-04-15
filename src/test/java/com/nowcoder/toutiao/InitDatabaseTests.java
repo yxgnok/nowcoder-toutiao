@@ -1,10 +1,11 @@
 package com.nowcoder.toutiao;
 
+import com.nowcoder.toutiao.dao.CommentDAO;
 import com.nowcoder.toutiao.dao.NewsDAO;
 import com.nowcoder.toutiao.dao.UserDAO;
+import com.nowcoder.toutiao.model.Comment;
 import com.nowcoder.toutiao.model.News;
 import com.nowcoder.toutiao.model.User;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class InitDatabaseTests {
 
     @Autowired
     private NewsDAO newsDAO;
+
+    @Autowired
+    private CommentDAO commentDAO;
 
     @Test
     public void initDatabase() {
@@ -52,6 +56,13 @@ public class InitDatabaseTests {
             newsDAO.addNews(news);
             System.out.println(news.getId());
 
+            Comment comment = new Comment();
+            comment.setContent("hello user" + i);
+            comment.setUserId(i+1);
+            comment.setCreatedDate(date);
+            comment.setUserId(i*i);
+            comment.setNewsId(i+100);
+            commentDAO.addComment(comment);
         }
 
     }
