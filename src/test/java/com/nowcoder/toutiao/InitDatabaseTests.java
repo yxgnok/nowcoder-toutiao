@@ -1,11 +1,14 @@
 package com.nowcoder.toutiao;
 
 import com.nowcoder.toutiao.dao.CommentDAO;
+import com.nowcoder.toutiao.dao.LoginTicketDAO;
 import com.nowcoder.toutiao.dao.NewsDAO;
 import com.nowcoder.toutiao.dao.UserDAO;
 import com.nowcoder.toutiao.model.Comment;
+import com.nowcoder.toutiao.model.LoginTicket;
 import com.nowcoder.toutiao.model.News;
 import com.nowcoder.toutiao.model.User;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,9 @@ public class InitDatabaseTests {
 
     @Autowired
     private CommentDAO commentDAO;
+
+    @Autowired
+    private LoginTicketDAO loginTicketDAO;
 
     @Test
     public void initDatabase() {
@@ -63,7 +69,19 @@ public class InitDatabaseTests {
             comment.setUserId(i*i);
             comment.setNewsId(i+100);
             commentDAO.addComment(comment);
+
+            LoginTicket ticket = new LoginTicket();
+            ticket.setStatus(0);
+            ticket.setUserId(i + 1);
+            ticket.setExpired(date);
+            ticket.setTicket(String.format("TICKET%d", i + 1));
+            loginTicketDAO.addTicket(ticket);
+
+            loginTicketDAO.updateStatus(ticket.getTicket(),2);
         }
+
+        Assert.assertEquals(1,loginTicketDAO.selectByTicket("TICKET1").getUserId());
+        Assert.assertEquals(2,loginTicketDAO.selectByTicket("TICKET1").getStatus());
 
     }
 

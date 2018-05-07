@@ -7,11 +7,20 @@ import java.util.Date;
  */
 public class Message {
     private int id;
-    private int fromid;
-    private int toid;
+    private int fromId;
+    private int toId;
     private String content;
     private int conversationId;
     private Date createdDate;
+    private int hasRead;
+
+    public int getHasRead() {
+        return hasRead;
+    }
+
+    public void setHasRead(int hasRead) {
+        this.hasRead = hasRead;
+    }
 
     public int getId() {
         return id;
@@ -21,20 +30,20 @@ public class Message {
         this.id = id;
     }
 
-    public int getFromid() {
-        return fromid;
+    public int getFromId() {
+        return fromId;
     }
 
-    public void setFromid(int fromid) {
-        this.fromid = fromid;
+    public void setFromId(int fromId) {
+        this.fromId = fromId;
     }
 
-    public int getToid() {
-        return toid;
+    public int getToId() {
+        return toId;
     }
 
-    public void setToid(int toid) {
-        this.toid = toid;
+    public void setToId(int toId) {
+        this.toId = toId;
     }
 
     public String getContent() {
