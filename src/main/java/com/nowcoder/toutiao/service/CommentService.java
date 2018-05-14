@@ -3,12 +3,14 @@ package com.nowcoder.toutiao.service;
 import com.nowcoder.toutiao.dao.CommentDAO;
 import com.nowcoder.toutiao.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by kongxy on 2018/5/6 0006.
  */
+@Service
 public class CommentService {
     @Autowired
     CommentDAO commentDAO;

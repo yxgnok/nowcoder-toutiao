@@ -62,13 +62,7 @@ public class InitDatabaseTests {
             newsDAO.addNews(news);
             System.out.println(news.getId());
 
-            Comment comment = new Comment();
-            comment.setContent("hello user" + i);
-            comment.setUserId(i+1);
-            comment.setCreatedDate(date);
-            comment.setUserId(i*i);
-            comment.setNewsId(i+100);
-            commentDAO.addComment(comment);
+
 
             LoginTicket ticket = new LoginTicket();
             ticket.setStatus(0);
