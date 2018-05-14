@@ -1,16 +1,24 @@
 package com.nowcoder.toutiao.controller;
 
+import com.nowcoder.toutiao.model.Comment;
+import com.nowcoder.toutiao.model.News;
+import com.nowcoder.toutiao.service.CommentService;
 import com.nowcoder.toutiao.service.NewsService;
 import com.nowcoder.toutiao.util.ToutiaoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.parser.Entity;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
 
 /**
  * Created by kongxy on 2018/5/6 0006.
@@ -21,16 +29,18 @@ public class NewsController {
 
     @Autowired
     NewsService newsService;
-//
-//    @RequestMapping(path = {"/news/{newsId}"}, method = {RequestMethod.GET})
-//    public String newsDetail(@PathVariable("newsId") int newsId, Model model) {
-//        try {
-//            News news = newsService.getById(newsId);
-//            if (news != null) {
-////                List<Comment> comments =
-//            }
-//        }
-//    }
+
+    @RequestMapping(path = {"/image"}, method = {RequestMethod.GET})
+    @ResponseBody
+    public void getImage(@RequestParam("name") String imageName,
+                         HttpServletResponse response) {
+        try {
+            response.setContentType("image/jpeg");
+            StreamUtils.copy(new FileInputStream(new File(ToutiaoUtil.IMAGE_DIR + imageName)), response.getOutputStream());
+        } catch (Exception e) {
+            logger.error("读取图片错误" + imageName + e.getMessage());
+        }
+    }
 
     //图片上传
     @RequestMapping(path = {"/uploadImage/"}, method = {RequestMethod.POST})
