@@ -1,24 +1,19 @@
 package com.nowcoder.toutiao.controller;
 
-import com.nowcoder.toutiao.model.Comment;
-import com.nowcoder.toutiao.model.News;
-import com.nowcoder.toutiao.service.CommentService;
+import com.nowcoder.toutiao.service.AliyunService;
 import com.nowcoder.toutiao.service.NewsService;
 import com.nowcoder.toutiao.util.ToutiaoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.html.parser.Entity;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.List;
 
 /**
  * Created by kongxy on 2018/5/6 0006.
@@ -29,6 +24,9 @@ public class NewsController {
 
     @Autowired
     NewsService newsService;
+
+    @Autowired
+    AliyunService aliyunService;
 
     @RequestMapping(path = {"/image"}, method = {RequestMethod.GET})
     @ResponseBody
@@ -47,7 +45,9 @@ public class NewsController {
     @ResponseBody
     public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
-            String fileUrl = newsService.saveImage(file);
+//            String fileUrl = newsService.saveImage(file);
+//            String fileUrl = qiniuService.saveImage(file);
+            String fileUrl = aliyunService.saveImage(file);
             if (fileUrl == null) {
                 return ToutiaoUtil.getJSONString(1, "上传图片失败");
             }
