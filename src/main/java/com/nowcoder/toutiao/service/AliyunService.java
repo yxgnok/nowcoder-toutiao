@@ -1,11 +1,8 @@
 package com.nowcoder.toutiao.service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
-import com.aliyun.oss.model.PutObjectResult;
 import com.nowcoder.toutiao.util.ToutiaoUtil;
-import netscape.javascript.JSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,8 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.security.Key;
 import java.util.UUID;
+
+import static com.nowcoder.toutiao.util.ToutiaoUtil.ALIYUN_IMAGE_URL;
 
 @Service
 public class AliyunService {
@@ -43,14 +41,11 @@ public class AliyunService {
 
             // 上传byte数组
             byte[] content = file.getBytes();
-            PutObjectResult result = ossClient.putObject("toutiaoimage", fileName, new ByteArrayInputStream(content));
-            return endpoint + JSONObject.parseObject(result.getETag()).get("key");
+            ossClient.putObject("toutiaoimage", fileName, new ByteArrayInputStream(content));
+            return ALIYUN_IMAGE_URL+fileName;
         } catch (OSSException oe) {
             logger.error("阿里云异常：", oe.getMessage());
             return null;
-        } finally {
-            //关闭client
-            ossClient.shutdown();
         }
     }
 

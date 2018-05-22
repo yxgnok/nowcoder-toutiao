@@ -4,10 +4,7 @@ import com.nowcoder.toutiao.dao.CommentDAO;
 import com.nowcoder.toutiao.dao.LoginTicketDAO;
 import com.nowcoder.toutiao.dao.NewsDAO;
 import com.nowcoder.toutiao.dao.UserDAO;
-import com.nowcoder.toutiao.model.Comment;
-import com.nowcoder.toutiao.model.LoginTicket;
-import com.nowcoder.toutiao.model.News;
-import com.nowcoder.toutiao.model.User;
+import com.nowcoder.toutiao.model.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,11 +69,23 @@ public class InitDatabaseTests {
             loginTicketDAO.addTicket(ticket);
 
             loginTicketDAO.updateStatus(ticket.getTicket(),2);
+
+            for (int j = 0; j < 3; j++) {
+                Comment comment = new Comment();
+                comment.setUserId(i + 1);
+                comment.setEntityId(news.getId());
+                comment.setEntityType(EntityType.ENTITY_NEWS);
+                comment.setStatus(0);
+                comment.setCreatedDate(new Date());
+                comment.setContent("comment :" + String.valueOf(j));
+                commentDAO.addComment(comment);
+            }
         }
 
         Assert.assertEquals(1,loginTicketDAO.selectByTicket("TICKET1").getUserId());
         Assert.assertEquals(2,loginTicketDAO.selectByTicket("TICKET1").getStatus());
 
+        Assert.assertNotNull(commentDAO.selectByEntity(1,EntityType.ENTITY_NEWS).get(0));
     }
 
 }

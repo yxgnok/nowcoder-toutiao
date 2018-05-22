@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface CommentDAO {
     String TABLE_NAME = "comment";
-    String INSERT_FIELDS = "content,user_id,entity_id,entity_type,created_date,status";
+    String INSERT_FIELDS = "user_id,content,created_date,entity_id,entity_type,status";
     String SELECT_FIELDS = "id," + INSERT_FIELDS;
 
     Comment selectById(int id);

@@ -14,6 +14,7 @@ import java.util.Map;
 public class ToutiaoUtil {
     private static final Logger logger = LoggerFactory.getLogger(ToutiaoUtil.class);
 
+    public static String ALIYUN_IMAGE_URL = "https://toutiaoimage.oss-cn-shenzhen.aliyuncs.com/";
     public static String TOUTIAO_DOMAIN="http://127.0.0.1:8080/";
     public static String IMAGE_DIR = "/home/du/upload/";
     public static String[] IMAGE_FILE_EXT = new String[] {"png","bmp","jpg","jpeg"};
