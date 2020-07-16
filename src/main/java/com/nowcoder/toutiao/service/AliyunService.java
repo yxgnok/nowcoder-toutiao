@@ -19,10 +19,10 @@ public class AliyunService {
     private static final Logger logger = LoggerFactory.getLogger(AliyunService.class);
 
     // endpoint以杭州为例，其它region请按实际情况填写
-    String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
+    String endpoint = "";
     // 云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，创建并使用RAM子账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建
-    String accessKeyId = "LTAIq3lmDoyahYBy";
-    String accessKeySecret = "5JDCmnPlBik4dRIFBveLySvacSigY5";
+    String accessKeyId = "";
+    String accessKeySecret = "";
     // 创建OSSClient实例
     OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 
